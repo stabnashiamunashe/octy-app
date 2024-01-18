@@ -1,27 +1,19 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-name = "branded-duplication-app"
-client_id = "02c9b8abca4541e00fb8f937ef1edcce"
-application_url = "https://shareholders-mi-namely-explained.trycloudflare.com"
+name = "octy-test-app"
+client_id = "99855a0593168b7a8e5b31bba6b9574d"
+application_url = "https://shopify.dev/apps/default-app-home"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = ""
 
 [auth]
-redirect_urls = [
-  "https://shareholders-mi-namely-explained.trycloudflare.com/auth/callback",
-  "https://shareholders-mi-namely-explained.trycloudflare.com/auth/shopify/callback",
-  "https://shareholders-mi-namely-explained.trycloudflare.com/api/auth/callback"
-]
+redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
 
 [webhooks]
 api_version = "2024-01"
 
 [pos]
 embedded = false
-
-[build]
-automatically_update_urls_on_dev = true
-dev_store_url = "munasheoctystore.myshopify.com"
