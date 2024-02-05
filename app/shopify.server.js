@@ -17,23 +17,65 @@ const shopify = shopifyApp({
   appUrl: process.env.SHOPIFY_APP_URL || "",
   authPathPrefix: "/auth",
   sessionStorage: new PrismaSessionStorage(prisma),
-  distribution: AppDistribution.AppStore,
+  distribution: AppDistribution.AppStore, 
   restResources,
   webhooks: {
     APP_UNINSTALLED: {
       deliveryMethod: DeliveryMethod.Http,
       callbackUrl: "/webhooks",
     },
+
+    PRODUCTS_UPDATE: {
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: `${process.env.OCTY_APP_HOST}/webhooks`,
+    },
+
+    CUSTOMERS_DELETE:{
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: `${process.env.OCTY_APP_HOST}/webhooks`,
+    },
+
+    ORDERS_CREATE:{
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: `${process.env.OCTY_APP_HOST}/webhooks`,
+    },
+
+    PRODUCTS_CREATE:{
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: `${process.env.OCTY_APP_HOST}/webhooks` ,
+    },
+
+    PRODUCTS_DELETE:{
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: `${process.env.OCTY_APP_HOST}/webhooks`,
+    },
+
   },
   hooks: {
     afterAuth: async ({ session }) => {
       shopify.registerWebhooks({ session });
-    },
+
+      try {
+        const response = await fetch( process.env.OCTY_APP_HOST + "/app_installed" , {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            shop: session.shop,
+            access_token: session.accessToken,
+            api_version: apiVersion,
+          }),
+        });
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+
+    },  
   },
-  future: {
-    v3_webhookAdminContext: true,
-    v3_authenticatePublic: true,
-  },
+
   ...(process.env.SHOP_CUSTOM_DOMAIN
     ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
     : {}),

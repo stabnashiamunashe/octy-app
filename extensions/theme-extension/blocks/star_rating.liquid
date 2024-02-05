@@ -1,5 +1,5 @@
 {% assign avg_rating = block.settings.product.metafields.demo.avg_rating.value | round %}
-<span style="color:{{ block.settings.colour }}">
+<span style="display: none">
   {% render 'stars', rating: avg_rating %}
 </span>
 {% if avg_rating >= 4 %}
@@ -10,11 +10,11 @@
 
 {% schema %}
 {
-  "name": "Star Rating",
+  "name": "Custom Events",
   "target": "section",
+  "javascript": "pixels.js",
   "settings": [
-    { "type": "product", "id": "product", "label": "product", "autofill": true },
-    { "type": "color", "id": "colour", "label": "Star Colour", "default": "#ff0000" }
+    { "type": "product", "id": "product", "label": "product", "autofill": true }
   ]
 }
 {% endschema %}

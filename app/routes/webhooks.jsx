@@ -17,6 +17,42 @@ export const action = async ({ request }) => {
         await db.session.deleteMany({ where: { shop } });
       }
 
+      try {
+        const response = await fetch(
+          process.env.OCTY_APP_HOST + "/app_uninstalled?shop=" + shop,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+
+      break;
+
+    case "PRODUCTS_UPDATE":
+      try {
+        const response = await fetch(
+          `${process.env.OCTY_APP_HOST}/webhooks?shop=${shop}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
       break;
     case "CUSTOMERS_DATA_REQUEST":
     case "CUSTOMERS_REDACT":

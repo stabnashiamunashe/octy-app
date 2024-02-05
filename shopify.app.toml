@@ -2,18 +2,26 @@
 
 name = "octy-test-app"
 client_id = "99855a0593168b7a8e5b31bba6b9574d"
-application_url = "https://shopify.dev/apps/default-app-home"
+application_url = "https://bye-nsw-cordless-dental.trycloudflare.com"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = ""
+scopes = "read_customer_events,write_pixels,write_products,read_products,write_checkouts,write_orders,write_metaobjects,read_metaobjects"
 
 [auth]
-redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+redirect_urls = [
+  "https://bye-nsw-cordless-dental.trycloudflare.com/auth/callback",
+  "https://bye-nsw-cordless-dental.trycloudflare.com/auth/shopify/callback",
+  "https://bye-nsw-cordless-dental.trycloudflare.com/api/auth/callback"
+]
 
 [webhooks]
 api_version = "2024-01"
 
 [pos]
 embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "octymart.myshopify.com"
