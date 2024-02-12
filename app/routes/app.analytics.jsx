@@ -1,13 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import {
-  Page,
-  Card,
-  Select,
-  Layout,
-  Text,
-  BlockStack,
-  DatePicker,
-} from "@shopify/polaris";
+import { Page, Card, Select, Layout, Text, BlockStack } from "@shopify/polaris";
 import { ClientOnly } from "remix-utils/client-only";
 import styles from "@shopify/polaris-viz/build/esm/styles.css";
 import {
@@ -209,6 +201,23 @@ export default function ChartsViz() {
         { value: 1301, key: "Feb 06, 2024" },
         { value: 1188, key: "Feb 07, 2024" },
       ],
+    },
+  ];
+
+  const LineChartAnnotations = [
+    {
+      startKey: "Feb 01, 2024",
+      label: "Start of Valentine's Marketing Campaign",
+      axis: "x",
+      content: {
+        content:
+          "We ran a Valentine's Day Marketing Campaign starting from this day!",
+      },
+    },
+    {
+      startKey: "Feb 06, 2024",
+      label: "End of Valentines Marketing Campaign",
+      axis: "x",
     },
   ];
 
@@ -1020,6 +1029,7 @@ export default function ChartsViz() {
                     <Card sectioned>
                       <LineChart
                         sectioned
+                        annotations={LineChartAnnotations}
                         title={"LineChart"}
                         theme="Light"
                         data={LineChartData}
@@ -1064,6 +1074,7 @@ export default function ChartsViz() {
                     <Card sectioned>
                       <LineChart
                         sectioned
+                        annotations={LineChartAnnotations}
                         title={"LineChart"}
                         theme="Light"
                         data={eventsData}
@@ -1080,8 +1091,10 @@ export default function ChartsViz() {
                 New Visitors Over Time
               </Text>
               <DateRangePicker
-                onChange={() =>
-                  console.log("Hello There: the date has been changed")
+                onChange={(dateRange) =>
+                  console.log(
+                    `Selected Date Range:  \nSince :XXXXXXXX ", ${dateRange.since} \nUntil : ${dateRange.until}`
+                  )
                 }
               />
               <Card>
@@ -1090,6 +1103,7 @@ export default function ChartsViz() {
                     <Card sectioned>
                       <LineChart
                         sectioned
+                        annotations={LineChartAnnotations}
                         title={"LineChart"}
                         theme="Light"
                         data={newVisitorsData}

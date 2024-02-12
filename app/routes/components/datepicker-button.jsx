@@ -17,13 +17,14 @@ import {
 
 import { ArrowRightIcon, CalendarIcon } from "@shopify/polaris-icons";
 
-export default function DateRangePicker() {
+export default function DateRangePicker({ onChange }) {
   const { mdDown, lgUp } = useBreakpoints();
   const shouldShowMultiMonth = lgUp;
   const today = new Date(new Date().setHours(0, 0, 0, 0));
   const yesterday = new Date(
     new Date(new Date().setDate(today.getDate() - 1)).setHours(0, 0, 0, 0)
   );
+
   const ranges = [
     {
       title: "Today",
@@ -52,6 +53,7 @@ export default function DateRangePicker() {
       },
     },
   ];
+
   const [popoverActive, setPopoverActive] = useState(false);
   const [activeDateRange, setActiveDateRange] = useState(ranges[0]);
   const [inputValues, setInputValues] = useState({});
@@ -71,10 +73,6 @@ export default function DateRangePicker() {
     return date.length === 10 && isValidYearMonthDayDateString(date);
   }
   function parseYearMonthDayDateString(input) {
-    // Date-only strings (e.g. "1970-01-01") are treated as UTC, not local time
-    // when using new Date()
-    // We need to split year, month, day to pass into new Date() separately
-    // to get a localized Date
     const [year, month, day] = input.split("-");
     return new Date(Number(year), Number(month) - 1, Number(day));
   }
@@ -177,6 +175,7 @@ export default function DateRangePicker() {
   }
   function apply() {
     setPopoverActive(false);
+    onChange(activeDateRange.period);
   }
   function cancel() {
     setPopoverActive(false);
