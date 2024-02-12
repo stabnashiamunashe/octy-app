@@ -1,8 +1,4 @@
-import { 
-    Page, 
-    Layout, 
-    EmptyState 
-} from "@shopify/polaris";
+import { Page, Layout, EmptyState } from "@shopify/polaris";
 
 export default function NotFound() {
   return (
