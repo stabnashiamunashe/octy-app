@@ -18,9 +18,13 @@ import {
 import { ArrowRightIcon, CalendarIcon } from "@shopify/polaris-icons";
 
 export default function DateRangePicker({ onChange }) {
+  
   const { mdDown, lgUp } = useBreakpoints();
+
   const shouldShowMultiMonth = lgUp;
+
   const today = new Date(new Date().setHours(0, 0, 0, 0));
+
   const yesterday = new Date(
     new Date(new Date().setDate(today.getDate() - 1)).setHours(0, 0, 0, 0)
   );
@@ -55,27 +59,37 @@ export default function DateRangePicker({ onChange }) {
   ];
 
   const [popoverActive, setPopoverActive] = useState(false);
+
   const [activeDateRange, setActiveDateRange] = useState(ranges[0]);
+
   const [inputValues, setInputValues] = useState({});
+
   const [{ month, year }, setDate] = useState({
     month: activeDateRange.period.since.getMonth(),
     year: activeDateRange.period.since.getFullYear(),
   });
+
   const datePickerRef = useRef(null);
+
   const VALID_YYYY_MM_DD_DATE_REGEX = /^\d{4}-\d{1,2}-\d{1,2}/;
+
   function isDate(date) {
     return !isNaN(new Date(date).getDate());
   }
+
   function isValidYearMonthDayDateString(date) {
     return VALID_YYYY_MM_DD_DATE_REGEX.test(date) && isDate(date);
   }
+
   function isValidDate(date) {
     return date.length === 10 && isValidYearMonthDayDateString(date);
   }
+
   function parseYearMonthDayDateString(input) {
     const [year, month, day] = input.split("-");
     return new Date(Number(year), Number(month) - 1, Number(day));
   }
+
   function formatDateToYearMonthDayDateString(date) {
     const year = String(date.getFullYear());
     let month = String(date.getMonth() + 1);
@@ -88,9 +102,11 @@ export default function DateRangePicker({ onChange }) {
     }
     return [year, month, day].join("-");
   }
+
   function formatDate(date) {
     return formatDateToYearMonthDayDateString(date);
   }
+
   function nodeContainsDescendant(rootNode, descendant) {
     if (rootNode === descendant) {
       return true;
@@ -104,11 +120,13 @@ export default function DateRangePicker({ onChange }) {
     }
     return false;
   }
+
   function isNodeWithinPopover(node) {
     return datePickerRef?.current
       ? nodeContainsDescendant(datePickerRef.current, node)
       : false;
   }
+
   function handleStartInputValueChange(value) {
     setInputValues((prevState) => {
       return { ...prevState, since: value };
@@ -128,6 +146,7 @@ export default function DateRangePicker({ onChange }) {
       });
     }
   }
+
   function handleEndInputValueChange(value) {
     setInputValues((prevState) => ({ ...prevState, until: value }));
     if (isValidDate(value)) {
@@ -144,19 +163,21 @@ export default function DateRangePicker({ onChange }) {
       });
     }
   }
+
   function handleInputBlur({ relatedTarget }) {
     const isRelatedTargetWithinPopover =
       relatedTarget != null && isNodeWithinPopover(relatedTarget);
-    // If focus moves from the TextField to the Popover
-    // we don't want to close the popover
+
     if (isRelatedTargetWithinPopover) {
       return;
     }
     setPopoverActive(false);
   }
+
   function handleMonthChange(month, year) {
     setDate({ month, year });
   }
+
   function handleCalendarChange({ start, end }) {
     const newDateRange = ranges.find((range) => {
       return (
@@ -173,13 +194,16 @@ export default function DateRangePicker({ onChange }) {
     };
     setActiveDateRange(newDateRange);
   }
+
   function apply() {
     setPopoverActive(false);
     onChange(activeDateRange.period);
   }
+
   function cancel() {
     setPopoverActive(false);
   }
+
   useEffect(() => {
     if (activeDateRange) {
       setInputValues({
@@ -208,12 +232,14 @@ export default function DateRangePicker({ onChange }) {
       }
     }
   }, [activeDateRange]);
+
   const buttonValue =
     activeDateRange.title === "Custom"
       ? activeDateRange.period.since.toDateString() +
         " - " +
         activeDateRange.period.until.toDateString()
       : activeDateRange.title;
+
   return (
     <Popover
       active={popoverActive}

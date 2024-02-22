@@ -8,6 +8,7 @@ import {
   FunnelChart,
   LineChart,
   BarChart,
+  SimpleBarChart,
 } from "@shopify/polaris-viz";
 import DateRangePicker from "./components/datepicker-button";
 
@@ -21,52 +22,30 @@ export default function ChartsViz() {
   const [selected, setSelected] = useState("");
   const [data, setData] = useState(() => []);
   const [options, setOptions] = useState();
-
-  useEffect(() => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    setSelected(`${year}-${month}`);
-  }, []);
-
-  useEffect(() => {
-    if (selected) {
-      loadData(selected);
-    }
-  }, [selected]);
-
-  async function loadData(selected) {
-    const url = `https://driving-api.azurewebsites.net/os_visitors?target_month=${selected}`;
-
-    const response = await fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const responseData = await response.json();
-
-    setData(responseData.data);
-    setOptions(responseData.options);
-  }
-
-  async function handleSelect(selectedValue) {
-    setSelected(selectedValue);
-    loadData(selectedValue);
-  }
-
-  const funnelData = [
+  const [funnelData, setFunnelData] = useState([
     {
       data: [
-        { value: 132270, key: "search submitted" },
-        { value: 84699, key: "product viewed" },
-        { value: 1068, key: "checkout started" },
-        { value: 146, key: "charged" },
+        {
+          key: "search_submitted",
+          value: 1496,
+        },
+        {
+          key: "product_viewed",
+          value: 6960,
+        },
+        {
+          key: "checkout_started",
+          value: 76,
+        },
+        {
+          key: "charged",
+          value: 70,
+        },
       ],
       name: "Conversion",
     },
-  ];
-
-  const LineChartData = [
+  ]);
+  const [LineChartData, setLineChartData] = useState([
     {
       name: "Oct 01, 2023 - Feb 08, 2024",
       data: [
@@ -202,7 +181,87 @@ export default function ChartsViz() {
         { value: 1188, key: "Feb 07, 2024" },
       ],
     },
-  ];
+  ]);
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    setSelected(`${year}-${month}`);
+  }, []);
+
+  useEffect(() => {
+    if (selected) {
+      loadData(selected);
+    }
+  }, [selected]);
+
+  async function loadData(selected) {
+    const url = `https://driving-api.azurewebsites.net/operating_system/month?target_month=${selected}`;
+
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const responseData = await response.json();
+
+    setData(responseData.data);
+    setOptions(responseData.options);
+  }
+
+  async function handleSelect(selectedValue) {
+    setSelected(selectedValue);
+    loadData(selectedValue);
+  }
+
+  async function fetchLineData(startDate, endDate) {
+    const url = `https://driving-api.azurewebsites.net/events?start_date=${startDate}&end_date=${endDate}`;
+
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    setLineChartData(data);
+  }
+
+  async function fetchFunnelData(startDate, endDate) {
+    const url = `https://driving-api.azurewebsites.net/events_funnel?start_date=${startDate}&end_date=${endDate}`;
+
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    setFunnelData(data);
+  }
+
+  function handleDateChange(dateRange) {
+    const startDate = formatDate(dateRange.since);
+    const endDate = formatDate(dateRange.until);
+    fetchLineData(startDate, endDate);
+  }
+
+  function handleFunnelDateChange(dateRange) {
+    const startDate = formatDate(dateRange.since);
+    const endDate = formatDate(dateRange.until);
+    fetchFunnelData(startDate, endDate);
+  }
+
+  function formatDate(dateString) {
+    var originalDate = new Date(dateString);
+
+    var year = originalDate.getFullYear();
+    var month = ("0" + (originalDate.getMonth() + 1)).slice(-2);
+    var day = ("0" + originalDate.getDate()).slice(-2);
+    var formattedDateString = year + "-" + month + "-" + day;
+
+    return formattedDateString;
+  }
 
   const LineChartAnnotations = [
     {
@@ -215,7 +274,7 @@ export default function ChartsViz() {
       },
     },
     {
-      startKey: "Feb 06, 2024",
+      startKey: "Feb 18, 2024",
       label: "End of Valentines Marketing Campaign",
       axis: "x",
     },
@@ -931,76 +990,55 @@ export default function ChartsViz() {
     },
   ];
 
+  const simpleBarChartData = [
+    {
+      name: "BCFM 2019",
+      data: [
+        {
+          key: "Womens Leggings",
+          value: 3,
+        },
+        {
+          key: "Mens Bottoms",
+          value: 0,
+        },
+        {
+          key: "Mens Shorts",
+          value: 4,
+        },
+        {
+          key: "Socks",
+          value: 8,
+        },
+        {
+          key: "Hats",
+          value: 48,
+        },
+        {
+          key: "Ties",
+          value: 1,
+        },
+      ],
+      metadata: {
+        trends: {
+          0: {
+            value: "10%",
+          },
+        },
+      },
+    },
+  ];
+
   return (
     <Page>
       <PolarisVizProvider>
         <Layout>
           <Layout.Section>
-            <Text variant="headingXl" as="h4" padding="50">
-              Visitors by Operating System
-            </Text>
-            <Card padding="400">
-              <BlockStack gap="400">
-                <Select
-                  className="select-month"
-                  label="Month"
-                  options={options}
-                  onChange={handleSelect}
-                  value={selected}
-                />
-                <ClientOnly fallback={<Fallback />}>
-                  {() => {
-                    return (
-                      <Card sectioned title={"DonutChart"}>
-                        <div className="chart-container">
-                          {data && data.length > 0 && (
-                            <DonutChart
-                              theme="Light"
-                              data={data}
-                              legendPosition="left"
-                              // showLegendValues={true}
-                              legendFullWidth={true}
-                              // state={loading ? "loading" : "success"}
-                            />
-                          )}
-                        </div>
-                        <style jsx>{`
-                          .chart-container {
-                          }
-
-                          .card-wrapper {
-                            margin-left: auto;
-                            margin-right: auto;
-                            max-width: 1200px; /* Adjust the max-width as per your requirement */
-                          }
-
-                          @media (min-width: 30.625em) {
-                            .Polaris-Page {
-                              padding: 0 var(--p-space-600);
-                            }
-                          }
-
-                          @media (min-width: 600px) {
-                            /* Apply styles only for screen widths greater than or equal to 600px */
-                            .chart-container {
-                              display: block; /* Show the container for larger screens */
-                              height: 400px;
-                              width: 600px;
-                            }
-                          }
-                        `}</style>
-                      </Card>
-                    );
-                  }}
-                </ClientOnly>
-              </BlockStack>
-            </Card>
-          </Layout.Section>
-          <Layout.Section>
             <BlockStack gap="400">
               <Text variant="headingXl" as="h4" padding="50">
                 Conversion Funnel
               </Text>
+              <DateRangePicker onChange={handleFunnelDateChange} />
               <Card>
                 <ClientOnly fallback={<Fallback />}>
                   {() => (
@@ -1022,7 +1060,7 @@ export default function ChartsViz() {
               <Text variant="headingXl" as="h4" padding="50">
                 Events Over Time
               </Text>
-              <DateRangePicker />
+              <DateRangePicker onChange={handleDateChange} />
               <Card>
                 <ClientOnly fallback={<Fallback />}>
                   {() => (
@@ -1088,15 +1126,31 @@ export default function ChartsViz() {
           <Layout.Section>
             <BlockStack gap="400">
               <Text variant="headingXl" as="h4" padding="50">
+                Simple Bar Chart
+              </Text>
+              <DateRangePicker />
+              <Card>
+                <ClientOnly fallback={<Fallback />}>
+                  {() => (
+                    <Card sectioned>
+                      <SimpleBarChart
+                        sectioned
+                        title={"SimpleBarChart"}
+                        theme="Light"
+                        data={simpleBarChartData}
+                      />
+                    </Card>
+                  )}
+                </ClientOnly>
+              </Card>
+            </BlockStack>
+          </Layout.Section>
+          <Layout.Section>
+            <BlockStack gap="400">
+              <Text variant="headingXl" as="h4" padding="50">
                 New Visitors Over Time
               </Text>
-              <DateRangePicker
-                onChange={(dateRange) =>
-                  console.log(
-                    `Selected Date Range:  \nSince :XXXXXXXX ", ${dateRange.since} \nUntil : ${dateRange.until}`
-                  )
-                }
-              />
+              <DateRangePicker onChange={handleDateChange} />
               <Card>
                 <ClientOnly fallback={<Fallback />}>
                   {() => (
@@ -1111,6 +1165,68 @@ export default function ChartsViz() {
                     </Card>
                   )}
                 </ClientOnly>
+              </Card>
+            </BlockStack>
+          </Layout.Section>
+          <Layout.Section>
+            <BlockStack gap="400">
+              <Text variant="headingXl" as="h4" padding="50">
+                Visitors by Operating System
+              </Text>
+              <DateRangePicker />
+              <Card padding="400">
+                <BlockStack gap="400">
+                  <Select
+                    className="select-month"
+                    label="Month"
+                    options={options}
+                    onChange={handleSelect}
+                    value={selected}
+                  />
+                  <ClientOnly fallback={<Fallback />}>
+                    {() => {
+                      return (
+                        <Card sectioned title={"DonutChart"}>
+                          <div className="donut-chart-container">
+                            {data && data.length > 0 && (
+                              <DonutChart
+                                theme="Light"
+                                data={data}
+                                legendPosition="bottom"
+                                // showLegendValues={true}
+                                legendFullWidth={true}
+                                // state={loading ? "loading" : "success"}
+                              />
+                            )}
+                          </div>
+                          <style jsx>{`
+                          .donut-chart-container {
+                          }
+
+                          // .card-wrapper {
+                          //   margin-left: auto;
+                          //   margin-right: auto;
+                          //   max-width: 1200px; /* Adjust the max-width as per your requirement */
+                          // }
+
+                          @media (min-width: 30.625em) {
+                            .Polaris-Page {
+                              padding: 0 var(--p-space-600);
+                            }
+                          }
+
+                          @media (min-width: 600px) {
+                            /* Apply styles only for screen widths greater than or equal to 600px */
+                            .donut-chart-container { ontainer for larger screens */
+                               height: 600px;
+                            }
+                          }
+                        `}</style>
+                        </Card>
+                      );
+                    }}
+                  </ClientOnly>
+                </BlockStack>
               </Card>
             </BlockStack>
           </Layout.Section>

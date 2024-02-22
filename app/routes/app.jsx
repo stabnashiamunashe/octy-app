@@ -23,7 +23,6 @@ export default function App() {
           Home
         </Link>
         <Link to="/app/additional">Additional page</Link>
-        <Link to="/app/data-viz">Account Settings</Link>
         <Link to="/app/analytics">Analytics</Link>
         <Link to="/app/not-found">Not Found</Link>
       </ui-nav-menu>
