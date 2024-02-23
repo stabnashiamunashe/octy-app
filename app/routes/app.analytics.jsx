@@ -11,6 +11,7 @@ import {
   SimpleBarChart,
 } from "@shopify/polaris-viz";
 import DateRangePicker from "./components/datepicker-button";
+import DateListPicker from "./components/monthpicker";
 
 export const links = () => [{ rel: "stylesheet", href: styles }];
 
@@ -845,6 +846,807 @@ export default function ChartsViz() {
     },
   ];
 
+  const eventsOsData = [
+    {
+      name: "Windows",
+      data: [
+        {
+          value: 484,
+          key: "Jan 01, 2024",
+        },
+        {
+          value: 2370,
+          key: "Jan 02, 2024",
+        },
+        {
+          value: 1988,
+          key: "Jan 03, 2024",
+        },
+        {
+          value: 1652,
+          key: "Jan 04, 2024",
+        },
+        {
+          value: 2906,
+          key: "Jan 05, 2024",
+        },
+        {
+          value: 1752,
+          key: "Jan 06, 2024",
+        },
+        {
+          value: 1420,
+          key: "Jan 07, 2024",
+        },
+        {
+          value: 1770,
+          key: "Jan 08, 2024",
+        },
+        {
+          value: 1290,
+          key: "Jan 09, 2024",
+        },
+        {
+          value: 1456,
+          key: "Jan 10, 2024",
+        },
+        {
+          value: 1534,
+          key: "Jan 11, 2024",
+        },
+        {
+          value: 1106,
+          key: "Jan 12, 2024",
+        },
+        {
+          value: 436,
+          key: "Jan 13, 2024",
+        },
+        {
+          value: 416,
+          key: "Jan 14, 2024",
+        },
+        {
+          value: 1104,
+          key: "Jan 15, 2024",
+        },
+        {
+          value: 976,
+          key: "Jan 16, 2024",
+        },
+        {
+          value: 886,
+          key: "Jan 17, 2024",
+        },
+        {
+          value: 864,
+          key: "Jan 18, 2024",
+        },
+        {
+          value: 626,
+          key: "Jan 19, 2024",
+        },
+        {
+          value: 642,
+          key: "Jan 20, 2024",
+        },
+        {
+          value: 446,
+          key: "Jan 21, 2024",
+        },
+        {
+          value: 826,
+          key: "Jan 22, 2024",
+        },
+        {
+          value: 952,
+          key: "Jan 23, 2024",
+        },
+        {
+          value: 976,
+          key: "Jan 24, 2024",
+        },
+        {
+          value: 782,
+          key: "Jan 25, 2024",
+        },
+        {
+          value: 852,
+          key: "Jan 26, 2024",
+        },
+        {
+          value: 592,
+          key: "Jan 27, 2024",
+        },
+        {
+          value: 556,
+          key: "Jan 28, 2024",
+        },
+        {
+          value: 950,
+          key: "Jan 29, 2024",
+        },
+        {
+          value: 1104,
+          key: "Jan 30, 2024",
+        },
+        {
+          value: 998,
+          key: "Jan 31, 2024",
+        },
+        {
+          value: 870,
+          key: "Feb 01, 2024",
+        },
+        {
+          value: 1016,
+          key: "Feb 02, 2024",
+        },
+        {
+          value: 748,
+          key: "Feb 03, 2024",
+        },
+        {
+          value: 690,
+          key: "Feb 04, 2024",
+        },
+        {
+          value: 1000,
+          key: "Feb 05, 2024",
+        },
+        {
+          value: 910,
+          key: "Feb 06, 2024",
+        },
+        {
+          value: 942,
+          key: "Feb 07, 2024",
+        },
+        {
+          value: 1118,
+          key: "Feb 08, 2024",
+        },
+      ],
+    },
+    {
+      name: "Android",
+      data: [
+        {
+          value: 4392,
+          key: "Jan 01, 2024",
+        },
+        {
+          value: 5972,
+          key: "Jan 02, 2024",
+        },
+        {
+          value: 4436,
+          key: "Jan 03, 2024",
+        },
+        {
+          value: 3740,
+          key: "Jan 04, 2024",
+        },
+        {
+          value: 6638,
+          key: "Jan 05, 2024",
+        },
+        {
+          value: 6754,
+          key: "Jan 06, 2024",
+        },
+        {
+          value: 6820,
+          key: "Jan 07, 2024",
+        },
+        {
+          value: 3862,
+          key: "Jan 08, 2024",
+        },
+        {
+          value: 3368,
+          key: "Jan 09, 2024",
+        },
+        {
+          value: 2366,
+          key: "Jan 10, 2024",
+        },
+        {
+          value: 1990,
+          key: "Jan 11, 2024",
+        },
+        {
+          value: 2570,
+          key: "Jan 12, 2024",
+        },
+        {
+          value: 2386,
+          key: "Jan 13, 2024",
+        },
+        {
+          value: 3014,
+          key: "Jan 14, 2024",
+        },
+        {
+          value: 1956,
+          key: "Jan 15, 2024",
+        },
+        {
+          value: 1404,
+          key: "Jan 16, 2024",
+        },
+        {
+          value: 1742,
+          key: "Jan 17, 2024",
+        },
+        {
+          value: 1732,
+          key: "Jan 18, 2024",
+        },
+        {
+          value: 1540,
+          key: "Jan 19, 2024",
+        },
+        {
+          value: 1550,
+          key: "Jan 20, 2024",
+        },
+        {
+          value: 1626,
+          key: "Jan 21, 2024",
+        },
+        {
+          value: 1218,
+          key: "Jan 22, 2024",
+        },
+        {
+          value: 1326,
+          key: "Jan 23, 2024",
+        },
+        {
+          value: 1094,
+          key: "Jan 24, 2024",
+        },
+        {
+          value: 1340,
+          key: "Jan 25, 2024",
+        },
+        {
+          value: 1236,
+          key: "Jan 26, 2024",
+        },
+        {
+          value: 1350,
+          key: "Jan 27, 2024",
+        },
+        {
+          value: 1476,
+          key: "Jan 28, 2024",
+        },
+        {
+          value: 1258,
+          key: "Jan 29, 2024",
+        },
+        {
+          value: 1168,
+          key: "Jan 30, 2024",
+        },
+        {
+          value: 1116,
+          key: "Jan 31, 2024",
+        },
+        {
+          value: 1370,
+          key: "Feb 01, 2024",
+        },
+        {
+          value: 1170,
+          key: "Feb 02, 2024",
+        },
+        {
+          value: 1264,
+          key: "Feb 03, 2024",
+        },
+        {
+          value: 1676,
+          key: "Feb 04, 2024",
+        },
+        {
+          value: 1360,
+          key: "Feb 05, 2024",
+        },
+        {
+          value: 1584,
+          key: "Feb 06, 2024",
+        },
+        {
+          value: 1290,
+          key: "Feb 07, 2024",
+        },
+        {
+          value: 1078,
+          key: "Feb 08, 2024",
+        },
+      ],
+    },
+    {
+      name: "iOS",
+      data: [
+        {
+          value: 374,
+          key: "Jan 01, 2024",
+        },
+        {
+          value: 690,
+          key: "Jan 02, 2024",
+        },
+        {
+          value: 472,
+          key: "Jan 03, 2024",
+        },
+        {
+          value: 358,
+          key: "Jan 04, 2024",
+        },
+        {
+          value: 858,
+          key: "Jan 05, 2024",
+        },
+        {
+          value: 720,
+          key: "Jan 06, 2024",
+        },
+        {
+          value: 1044,
+          key: "Jan 07, 2024",
+        },
+        {
+          value: 378,
+          key: "Jan 08, 2024",
+        },
+        {
+          value: 272,
+          key: "Jan 09, 2024",
+        },
+        {
+          value: 288,
+          key: "Jan 10, 2024",
+        },
+        {
+          value: 164,
+          key: "Jan 11, 2024",
+        },
+        {
+          value: 200,
+          key: "Jan 12, 2024",
+        },
+        {
+          value: 166,
+          key: "Jan 13, 2024",
+        },
+        {
+          value: 266,
+          key: "Jan 14, 2024",
+        },
+        {
+          value: 112,
+          key: "Jan 15, 2024",
+        },
+        {
+          value: 112,
+          key: "Jan 16, 2024",
+        },
+        {
+          value: 100,
+          key: "Jan 17, 2024",
+        },
+        {
+          value: 60,
+          key: "Jan 18, 2024",
+        },
+        {
+          value: 204,
+          key: "Jan 19, 2024",
+        },
+        {
+          value: 70,
+          key: "Jan 20, 2024",
+        },
+        {
+          value: 204,
+          key: "Jan 21, 2024",
+        },
+        {
+          value: 122,
+          key: "Jan 22, 2024",
+        },
+        {
+          value: 48,
+          key: "Jan 23, 2024",
+        },
+        {
+          value: 168,
+          key: "Jan 24, 2024",
+        },
+        {
+          value: 82,
+          key: "Jan 25, 2024",
+        },
+        {
+          value: 18,
+          key: "Jan 26, 2024",
+        },
+        {
+          value: 104,
+          key: "Jan 27, 2024",
+        },
+        {
+          value: 156,
+          key: "Jan 28, 2024",
+        },
+        {
+          value: 64,
+          key: "Jan 29, 2024",
+        },
+        {
+          value: 66,
+          key: "Jan 30, 2024",
+        },
+        {
+          value: 70,
+          key: "Jan 31, 2024",
+        },
+        {
+          value: 114,
+          key: "Feb 01, 2024",
+        },
+        {
+          value: 80,
+          key: "Feb 02, 2024",
+        },
+        {
+          value: 96,
+          key: "Feb 03, 2024",
+        },
+        {
+          value: 80,
+          key: "Feb 04, 2024",
+        },
+        {
+          value: 62,
+          key: "Feb 05, 2024",
+        },
+        {
+          value: 56,
+          key: "Feb 06, 2024",
+        },
+        {
+          value: 82,
+          key: "Feb 07, 2024",
+        },
+        {
+          value: 88,
+          key: "Feb 08, 2024",
+        },
+      ],
+    },
+    {
+      name: "Mac OS X",
+      data: [
+        {
+          value: 68,
+          key: "Jan 01, 2024",
+        },
+        {
+          value: 74,
+          key: "Jan 02, 2024",
+        },
+        {
+          value: 54,
+          key: "Jan 03, 2024",
+        },
+        {
+          value: 38,
+          key: "Jan 04, 2024",
+        },
+        {
+          value: 148,
+          key: "Jan 05, 2024",
+        },
+        {
+          value: 42,
+          key: "Jan 06, 2024",
+        },
+        {
+          value: 20,
+          key: "Jan 07, 2024",
+        },
+        {
+          value: 24,
+          key: "Jan 08, 2024",
+        },
+        {
+          value: 48,
+          key: "Jan 09, 2024",
+        },
+        {
+          value: 22,
+          key: "Jan 10, 2024",
+        },
+        {
+          value: 26,
+          key: "Jan 11, 2024",
+        },
+        {
+          value: 34,
+          key: "Jan 12, 2024",
+        },
+        {
+          value: 34,
+          key: "Jan 13, 2024",
+        },
+        {
+          value: 98,
+          key: "Jan 14, 2024",
+        },
+        {
+          value: 102,
+          key: "Jan 15, 2024",
+        },
+        {
+          value: 38,
+          key: "Jan 16, 2024",
+        },
+        {
+          value: 14,
+          key: "Jan 18, 2024",
+        },
+        {
+          value: 64,
+          key: "Jan 19, 2024",
+        },
+        {
+          value: 32,
+          key: "Jan 21, 2024",
+        },
+        {
+          value: 8,
+          key: "Jan 22, 2024",
+        },
+        {
+          value: 46,
+          key: "Jan 23, 2024",
+        },
+        {
+          value: 38,
+          key: "Jan 24, 2024",
+        },
+        {
+          value: 6,
+          key: "Jan 25, 2024",
+        },
+        {
+          value: 26,
+          key: "Jan 26, 2024",
+        },
+        {
+          value: 44,
+          key: "Jan 27, 2024",
+        },
+        {
+          value: 20,
+          key: "Jan 28, 2024",
+        },
+        {
+          value: 2,
+          key: "Jan 29, 2024",
+        },
+        {
+          value: 12,
+          key: "Jan 31, 2024",
+        },
+        {
+          value: 6,
+          key: "Feb 02, 2024",
+        },
+        {
+          value: 2,
+          key: "Feb 03, 2024",
+        },
+        {
+          value: 20,
+          key: "Feb 05, 2024",
+        },
+        {
+          value: 24,
+          key: "Feb 06, 2024",
+        },
+        {
+          value: 26,
+          key: "Feb 07, 2024",
+        },
+        {
+          value: 52,
+          key: "Feb 08, 2024",
+        },
+      ],
+    },
+    {
+      name: "Linux",
+      data: [
+        {
+          value: 26,
+          key: "Jan 01, 2024",
+        },
+        {
+          value: 42,
+          key: "Jan 02, 2024",
+        },
+        {
+          value: 78,
+          key: "Jan 03, 2024",
+        },
+        {
+          value: 8,
+          key: "Jan 04, 2024",
+        },
+        {
+          value: 74,
+          key: "Jan 05, 2024",
+        },
+        {
+          value: 158,
+          key: "Jan 06, 2024",
+        },
+        {
+          value: 18,
+          key: "Jan 07, 2024",
+        },
+        {
+          value: 72,
+          key: "Jan 08, 2024",
+        },
+        {
+          value: 134,
+          key: "Jan 09, 2024",
+        },
+        {
+          value: 186,
+          key: "Jan 11, 2024",
+        },
+        {
+          value: 20,
+          key: "Jan 12, 2024",
+        },
+        {
+          value: 12,
+          key: "Jan 13, 2024",
+        },
+        {
+          value: 30,
+          key: "Jan 14, 2024",
+        },
+        {
+          value: 2,
+          key: "Jan 15, 2024",
+        },
+        {
+          value: 4,
+          key: "Jan 16, 2024",
+        },
+        {
+          value: 8,
+          key: "Jan 17, 2024",
+        },
+        {
+          value: 64,
+          key: "Jan 18, 2024",
+        },
+        {
+          value: 32,
+          key: "Jan 19, 2024",
+        },
+        {
+          value: 64,
+          key: "Jan 20, 2024",
+        },
+        {
+          value: 34,
+          key: "Jan 21, 2024",
+        },
+        {
+          value: 14,
+          key: "Jan 22, 2024",
+        },
+        {
+          value: 28,
+          key: "Jan 23, 2024",
+        },
+        {
+          value: 46,
+          key: "Jan 24, 2024",
+        },
+        {
+          value: 22,
+          key: "Jan 25, 2024",
+        },
+        {
+          value: 4,
+          key: "Jan 26, 2024",
+        },
+        {
+          value: 118,
+          key: "Jan 27, 2024",
+        },
+        {
+          value: 42,
+          key: "Jan 28, 2024",
+        },
+        {
+          value: 100,
+          key: "Jan 29, 2024",
+        },
+        {
+          value: 54,
+          key: "Jan 30, 2024",
+        },
+        {
+          value: 18,
+          key: "Jan 31, 2024",
+        },
+        {
+          value: 118,
+          key: "Feb 01, 2024",
+        },
+        {
+          value: 38,
+          key: "Feb 02, 2024",
+        },
+        {
+          value: 20,
+          key: "Feb 03, 2024",
+        },
+        {
+          value: 26,
+          key: "Feb 06, 2024",
+        },
+        {
+          value: 36,
+          key: "Feb 07, 2024",
+        },
+        {
+          value: 70,
+          key: "Feb 08, 2024",
+        },
+      ],
+    },
+    {
+      name: "Chrome OS",
+      data: [
+        {
+          value: 8,
+          key: "Jan 04, 2024",
+        },
+        {
+          value: 10,
+          key: "Jan 14, 2024",
+        },
+        {
+          value: 2,
+          key: "Jan 18, 2024",
+        },
+        {
+          value: 4,
+          key: "Jan 30, 2024",
+        },
+        {
+          value: 4,
+          key: "Feb 08, 2024",
+        },
+      ],
+    },
+  ];
+
   const newVisitorsData = [
     {
       name: "New Visitors Over Time",
@@ -1031,7 +1833,23 @@ export default function ChartsViz() {
 
   return (
     <Page>
-      <PolarisVizProvider>
+      <style jsx>{`
+        @media (min-width: 30.625em) {
+          .Polaris-Page {
+            padding: 0 var(--p-space-600);
+          }
+        }
+      `}</style>
+      <PolarisVizProvider
+        themes={{
+          Default: {
+            arc: {
+              cornerRadius: 5,
+              thickness: 18,
+            },
+          },
+        }}
+      >
         <Layout>
           <Layout.Section>
             <BlockStack gap="400">
@@ -1093,6 +1911,28 @@ export default function ChartsViz() {
                         title={"BarChart"}
                         theme="Light"
                         data={LineChartData}
+                      />
+                    </Card>
+                  )}
+                </ClientOnly>
+              </Card>
+            </BlockStack>
+          </Layout.Section>
+          <Layout.Section>
+            <BlockStack gap="400">
+              <Text variant="headingXl" as="h4" padding="50">
+                Events Over Time per OS
+              </Text>
+              <DateRangePicker />
+              <Card>
+                <ClientOnly fallback={<Fallback />}>
+                  {() => (
+                    <Card sectioned>
+                      <LineChart
+                        sectioned
+                        title={"LineChart"}
+                        theme="Light"
+                        data={eventsOsData}
                       />
                     </Card>
                   )}
@@ -1173,7 +2013,11 @@ export default function ChartsViz() {
               <Text variant="headingXl" as="h4" padding="50">
                 Visitors by Operating System
               </Text>
-              <DateRangePicker />
+              <DateListPicker
+                options={options}
+                onChange={handleSelect}
+                value={selected}
+              />
               <Card padding="400">
                 <BlockStack gap="400">
                   <Select
@@ -1199,29 +2043,51 @@ export default function ChartsViz() {
                               />
                             )}
                           </div>
-                          <style jsx>{`
-                          .donut-chart-container {
-                          }
-
-                          // .card-wrapper {
-                          //   margin-left: auto;
-                          //   margin-right: auto;
-                          //   max-width: 1200px; /* Adjust the max-width as per your requirement */
-                          // }
-
-                          @media (min-width: 30.625em) {
-                            .Polaris-Page {
-                              padding: 0 var(--p-space-600);
-                            }
-                          }
-
-                          @media (min-width: 600px) {
-                            /* Apply styles only for screen widths greater than or equal to 600px */
-                            .donut-chart-container { ontainer for larger screens */
-                               height: 600px;
-                            }
-                          }
-                        `}</style>
+                        </Card>
+                      );
+                    }}
+                  </ClientOnly>
+                </BlockStack>
+              </Card>
+            </BlockStack>
+          </Layout.Section>
+          <Layout.Section>
+            <BlockStack gap="400">
+              <Text variant="headingXl" as="h4" padding="50">
+                Visitors by Operating System
+              </Text>
+              <DateRangePicker />
+              <Card padding="400">
+                <BlockStack gap="400">
+                  <Select
+                    className="select-month"
+                    label="Month"
+                    options={options}
+                    onChange={handleSelect}
+                    value={selected}
+                  />
+                  <ClientOnly fallback={<Fallback />}>
+                    {() => {
+                      return (
+                        <Card sectioned title={"DonutChart"}>
+                          <div
+                            style={{
+                              height: 400,
+                              // width: 550,
+                            }}
+                          >
+                            <DonutChart
+                              comparisonMetric={{
+                                accessibilityLabel: "trending up 6%",
+                                metric: "6%",
+                                trend: "positive",
+                              }}
+                              data={data}
+                              theme="Light"
+                              legendPosition="bottom"
+                              legendFullWidth={true}
+                            />
+                          </div>
                         </Card>
                       );
                     }}
