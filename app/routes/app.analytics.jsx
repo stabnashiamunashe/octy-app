@@ -184,6 +184,7 @@ export default function ChartsViz() {
     },
   ]);
 
+  console.log("Main Component : Selected", selected);
   useEffect(() => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -214,6 +215,7 @@ export default function ChartsViz() {
 
   async function handleSelect(selectedValue) {
     setSelected(selectedValue);
+    console.log(selectedValue);
     loadData(selectedValue);
   }
 
@@ -2015,57 +2017,11 @@ export default function ChartsViz() {
               </Text>
               <DateListPicker
                 options={options}
-                onChange={handleSelect}
+                onValueChange={handleSelect}
                 value={selected}
               />
               <Card padding="400">
                 <BlockStack gap="400">
-                  <Select
-                    className="select-month"
-                    label="Month"
-                    options={options}
-                    onChange={handleSelect}
-                    value={selected}
-                  />
-                  <ClientOnly fallback={<Fallback />}>
-                    {() => {
-                      return (
-                        <Card sectioned title={"DonutChart"}>
-                          <div className="donut-chart-container">
-                            {data && data.length > 0 && (
-                              <DonutChart
-                                theme="Light"
-                                data={data}
-                                legendPosition="bottom"
-                                // showLegendValues={true}
-                                legendFullWidth={true}
-                                // state={loading ? "loading" : "success"}
-                              />
-                            )}
-                          </div>
-                        </Card>
-                      );
-                    }}
-                  </ClientOnly>
-                </BlockStack>
-              </Card>
-            </BlockStack>
-          </Layout.Section>
-          <Layout.Section>
-            <BlockStack gap="400">
-              <Text variant="headingXl" as="h4" padding="50">
-                Visitors by Operating System
-              </Text>
-              <DateRangePicker />
-              <Card padding="400">
-                <BlockStack gap="400">
-                  <Select
-                    className="select-month"
-                    label="Month"
-                    options={options}
-                    onChange={handleSelect}
-                    value={selected}
-                  />
                   <ClientOnly fallback={<Fallback />}>
                     {() => {
                       return (

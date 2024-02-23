@@ -76,10 +76,14 @@ export default function DateListPicker({ options, onValueChange, value }) {
   const [popoverActive, setPopoverActive] = useState(false);
 
   const handleSelect = (newValue) => {
+    console.log(`Child Component - selected: ${newValue}`);
     setSelected(newValue);
     onValueChange(newValue);
     setPopoverActive(false);
   };
+
+  console.log(`Options : ${options}`);
+  console.log(`Selected : ${selected}`);
 
   return (
     <Popover
@@ -92,14 +96,14 @@ export default function DateListPicker({ options, onValueChange, value }) {
           onClick={() => setPopoverActive(!popoverActive)}
           icon={CalendarIcon}
         >
-          {selected ? selected.label : "This Month"}
+          {selected ? selected : "This Month"}
         </Button>
       }
       active={popoverActive}
     >
       <OptionList
         options={options}
-        selected={selected ? selected.value : ""}
+        selected={selected ? selected : ""}
         onChange={handleSelect}
       />
     </Popover>
