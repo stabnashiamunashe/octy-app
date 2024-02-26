@@ -18,12 +18,15 @@ import {
 import { ArrowRightIcon, CalendarIcon } from "@shopify/polaris-icons";
 
 export default function DateRangePicker({ onChange }) {
-  
   const { mdDown, lgUp } = useBreakpoints();
 
   const shouldShowMultiMonth = lgUp;
 
   const today = new Date(new Date().setHours(0, 0, 0, 0));
+
+  const ThirtyDaysAgo = new Date(
+    new Date(new Date().setDate(today.getDate() - 30)).setHours(0, 0, 0, 0)
+  );
 
   const yesterday = new Date(
     new Date(new Date().setDate(today.getDate() - 1)).setHours(0, 0, 0, 0)
@@ -31,31 +34,31 @@ export default function DateRangePicker({ onChange }) {
 
   const ranges = [
     {
-      title: "Today",
-      alias: "today",
+      title: "Last 30 days",
+      alias: "last30days",
       period: {
-        since: today,
+        since: ThirtyDaysAgo,
         until: today,
       },
     },
-    {
-      title: "Yesterday",
-      alias: "yesterday",
-      period: {
-        since: yesterday,
-        until: yesterday,
-      },
-    },
-    {
-      title: "Last 7 days",
-      alias: "last7days",
-      period: {
-        since: new Date(
-          new Date(new Date().setDate(today.getDate() - 7)).setHours(0, 0, 0, 0)
-        ),
-        until: yesterday,
-      },
-    },
+    // {
+    //   title: "Yesterday",
+    //   alias: "yesterday",
+    //   period: {
+    //     since: yesterday,
+    //     until: yesterday,
+    //   },
+    // },
+    // {
+    //   title: "Last 7 days",
+    //   alias: "last7days",
+    //   period: {
+    //     since: new Date(
+    //       new Date(new Date().setDate(today.getDate() - 7)).setHours(0, 0, 0, 0)
+    //     ),
+    //     until: yesterday,
+    //   },
+    // },
   ];
 
   const [popoverActive, setPopoverActive] = useState(false);

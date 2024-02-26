@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Page, Card, Select, Layout, Text, BlockStack } from "@shopify/polaris";
+import React, { useEffect, useState } from "react";
+import { Page, Card, Layout, Text, BlockStack } from "@shopify/polaris";
 import { ClientOnly } from "remix-utils/client-only";
 import styles from "@shopify/polaris-viz/build/esm/styles.css";
 import {
@@ -199,6 +199,7 @@ export default function ChartsViz() {
   }, [selected]);
 
   async function loadData(selected) {
+    // const url = process.env.OCTY_ANALYTICS_URL + `/operating_system/month?target_month=${selected}`;
     const url = `https://driving-api.azurewebsites.net/operating_system/month?target_month=${selected}`;
 
     const response = await fetch(url, {
@@ -220,6 +221,7 @@ export default function ChartsViz() {
   }
 
   async function fetchLineData(startDate, endDate) {
+    // const url = process.env.OCTY_ANALYTICS_URL + `/events?start_date=${startDate}&end_date=${endDate}`;
     const url = `https://driving-api.azurewebsites.net/events?start_date=${startDate}&end_date=${endDate}`;
 
     const response = await fetch(url, {
@@ -232,6 +234,7 @@ export default function ChartsViz() {
   }
 
   async function fetchFunnelData(startDate, endDate) {
+    // const url = process.env.OCTY_ANALYTICS_URL + `/events_funnel?start_date=${startDate}&end_date=${endDate}`;
     const url = `https://driving-api.azurewebsites.net/events_funnel?start_date=${startDate}&end_date=${endDate}`;
 
     const response = await fetch(url, {
@@ -1968,28 +1971,6 @@ export default function ChartsViz() {
           <Layout.Section>
             <BlockStack gap="400">
               <Text variant="headingXl" as="h4" padding="50">
-                Simple Bar Chart
-              </Text>
-              <DateRangePicker />
-              <Card>
-                <ClientOnly fallback={<Fallback />}>
-                  {() => (
-                    <Card sectioned>
-                      <SimpleBarChart
-                        sectioned
-                        title={"SimpleBarChart"}
-                        theme="Light"
-                        data={simpleBarChartData}
-                      />
-                    </Card>
-                  )}
-                </ClientOnly>
-              </Card>
-            </BlockStack>
-          </Layout.Section>
-          <Layout.Section>
-            <BlockStack gap="400">
-              <Text variant="headingXl" as="h4" padding="50">
                 New Visitors Over Time
               </Text>
               <DateRangePicker onChange={handleDateChange} />
@@ -2049,6 +2030,28 @@ export default function ChartsViz() {
                     }}
                   </ClientOnly>
                 </BlockStack>
+              </Card>
+            </BlockStack>
+          </Layout.Section>
+          <Layout.Section>
+            <BlockStack gap="400">
+              <Text variant="headingXl" as="h4" padding="50">
+                Simple Bar Chart
+              </Text>
+              <DateRangePicker />
+              <Card>
+                <ClientOnly fallback={<Fallback />}>
+                  {() => (
+                    <Card sectioned>
+                      <SimpleBarChart
+                        sectioned
+                        title={"SimpleBarChart"}
+                        theme="Light"
+                        data={simpleBarChartData}
+                      />
+                    </Card>
+                  )}
+                </ClientOnly>
               </Card>
             </BlockStack>
           </Layout.Section>

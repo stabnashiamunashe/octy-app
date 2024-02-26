@@ -4,6 +4,7 @@ import polarisStyles from "@shopify/polaris/build/esm/styles.css";
 import { boundary } from "@shopify/shopify-app-remix/server";
 import { AppProvider } from "@shopify/shopify-app-remix/react";
 import { authenticate } from "../shopify.server";
+import { CalendarIcon } from "@shopify/polaris-icons";
 
 export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
 
@@ -24,7 +25,10 @@ export default function App() {
         </Link>
         <Link to="/app/additional">Additional page</Link>
         <Link to="/app/analytics">Analytics</Link>
-        <Link to="/app/not-found">Not Found</Link>
+        <Link to="/app/not-found">
+          <CalendarIcon />
+          Not Found
+        </Link>
       </ui-nav-menu>
       <Outlet />
     </AppProvider>
