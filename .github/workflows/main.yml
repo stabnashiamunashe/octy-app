@@ -23,3 +23,5 @@ jobs:
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
         run: npm run deploy -- -f --source-control-url "$COMMIT_URL"
+
+#Adjusted Bundler
