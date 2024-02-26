@@ -2,8 +2,9 @@ name: Deploy app
 on:
   push:
     branches:
-      - productiom
+      - main
 jobs:
+  runs-on: self-hosted
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
