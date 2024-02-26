@@ -18,7 +18,7 @@ jobs:
         run: npm install
       - name: Deploy
         env:
-          # Token from the Partner Dashboard
+          # Token from the Partner Dashboard.
           SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_PARTNERS_TOKEN }}
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           # .env content after a deploy
