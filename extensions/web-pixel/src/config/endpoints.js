@@ -1,4 +1,4 @@
-const octyAppHost = "https://pod1.sonity.net/octy-shopify";
+const octyAppHost = "https://octy-shopify.azurewebsites.net";
 
 module.exports = {
   octyAppHost,
