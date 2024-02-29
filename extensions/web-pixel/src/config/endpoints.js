@@ -1,4 +1,4 @@
-const octyAppHost = "https://octy-shopify.azurewebsites.net";
+const octyAppHost = "https://famous-phoenix-noticeably.ngrok-free.app";
 
 module.exports = {
   octyAppHost,
