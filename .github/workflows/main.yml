@@ -41,20 +41,20 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
 
-  deploy:
-    name: Deploy on server
-    runs-on: self-hosted
-    needs: build
-    steps:
-      - name: SSH into the server and deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SERVER_PORT }}
-          script: |
-            docker --version
-            sudo usermod -aG docker $USER
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
+  # deploy:
+  #   name: Deploy on server
+  #   runs-on: self-hosted
+  #   needs: build
+  #   steps:
+  #     - name: SSH into the server and deploy
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.SERVER_IP }}
+  #         username: ${{ secrets.SERVER_USERNAME }}
+  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         port: ${{ secrets.SERVER_PORT }}
+  #         script: |
+  #           docker --version
+  #           sudo usermod -aG docker $USER
+  #           docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_IMAGE }}:${{ github.sha }}
 
