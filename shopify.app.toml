@@ -1,19 +1,19 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 name = "octy-app"
-client_id = "99855a0593168b7a8e5b31bba6b9574d"
-application_url = "https://bmw-kelly-periodically-contact.trycloudflare.com"
+client_id = "9ff0974b54554e8f77107be0bef2c9d7"
+application_url = "https://kiss-fi-also-encounter.trycloudflare.com"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_customer_events,write_pixels,write_products,read_products,write_checkouts,write_orders,write_metaobjects,read_metaobjects"
+scopes = "read_customer_events,write_pixels,write_products,write_checkouts,write_orders,write_metaobjects,read_metaobjects,write_discounts,write_price_rules"
 
 [auth]
 redirect_urls = [
-  "https://bmw-kelly-periodically-contact.trycloudflare.com/auth/callback",
-  "https://bmw-kelly-periodically-contact.trycloudflare.com/auth/shopify/callback",
-  "https://bmw-kelly-periodically-contact.trycloudflare.com/api/auth/callback"
+  "https://kiss-fi-also-encounter.trycloudflare.com/auth/callback",
+  "https://kiss-fi-also-encounter.trycloudflare.com/auth/shopify/callback",
+  "https://kiss-fi-also-encounter.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
@@ -22,9 +22,7 @@ api_version = "2024-01"
 [pos]
 embedded = false
 
-[app_preferences]
-url = "https://pod1.sonity.net/"
-
 [build]
 automatically_update_urls_on_dev = true
+include_config_on_deploy = true
 dev_store_url = "octymart.myshopify.com"

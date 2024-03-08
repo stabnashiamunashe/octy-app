@@ -517,6 +517,8 @@ register(async ({ analytics, browser, settings, init }) => {
     });
   });
 
+  // Custom events
+
   analytics.subscribe("page_scroll", async (event) => {
     const raw_octy_customer_id = await browser.localStorage.getItem(
       "octy_customer_id"
@@ -617,6 +619,183 @@ register(async ({ analytics, browser, settings, init }) => {
       headers: {
         "x-shopify-shop-domain": settings.accountID,
       },
+      body: JSON.stringify(eventData),
+      keepalive: true,
+    });
+  });
+
+  // DOM Events
+
+  analytics.subscribe("clicked", async (event) => {
+    const raw_octy_customer_id = await browser.localStorage.getItem(
+      "octy_customer_id"
+    );
+
+    let octy_customer_id = null;
+    if (raw_octy_customer_id != null) {
+      octy_customer_id = raw_octy_customer_id.replace(/^"(.*)"$/, "$1");
+    }
+
+    const fingerprint_id = await browser.cookie.get("fingerprint_id");
+
+    const eventData = {
+      id: event.id,
+      name: event.name,
+      fingerprint_id: fingerprint_id,
+      timestamp: event.timestamp,
+      clientId: event.clientId,
+      data: event.data,
+      context: event.context,
+      octy_customer_id: octy_customer_id,
+      shopify_customer_info: customer,
+      client_data,
+      cart: cart,
+    };
+
+    console.log(eventData);
+
+    fetch(`${endpoints.pixelURI}?shop=${settings.accountID}`, {
+      method: "POST",
+      body: JSON.stringify(eventData),
+      keepalive: true,
+    });
+  });
+
+  analytics.subscribe("form_submitted", async (event) => {
+    const raw_octy_customer_id = await browser.localStorage.getItem(
+      "octy_customer_id"
+    );
+
+    let octy_customer_id = null;
+    if (raw_octy_customer_id != null) {
+      octy_customer_id = raw_octy_customer_id.replace(/^"(.*)"$/, "$1");
+    }
+
+    const fingerprint_id = await browser.cookie.get("fingerprint_id");
+
+    const eventData = {
+      id: event.id,
+      name: event.name,
+      fingerprint_id: fingerprint_id,
+      timestamp: event.timestamp,
+      clientId: event.clientId,
+      data: event.data,
+      context: event.context,
+      octy_customer_id: octy_customer_id,
+      shopify_customer_info: customer,
+      client_data,
+      cart: cart,
+    };
+
+    console.log(eventData);
+
+    fetch(`${endpoints.pixelURI}?shop=${settings.accountID}`, {
+      method: "POST",
+      body: JSON.stringify(eventData),
+      keepalive: true,
+    });
+  });
+
+  analytics.subscribe("input_blurred", async (event) => {
+    const raw_octy_customer_id = await browser.localStorage.getItem(
+      "octy_customer_id"
+    );
+
+    let octy_customer_id = null;
+    if (raw_octy_customer_id != null) {
+      octy_customer_id = raw_octy_customer_id.replace(/^"(.*)"$/, "$1");
+    }
+
+    const fingerprint_id = await browser.cookie.get("fingerprint_id");
+
+    const eventData = {
+      id: event.id,
+      name: event.name,
+      fingerprint_id: fingerprint_id,
+      timestamp: event.timestamp,
+      clientId: event.clientId,
+      data: event.data,
+      context: event.context,
+      octy_customer_id: octy_customer_id,
+      shopify_customer_info: customer,
+      client_data,
+      cart: cart,
+    };
+
+    console.log(eventData);
+
+    fetch(`${endpoints.pixelURI}?shop=${settings.accountID}`, {
+      method: "POST",
+      body: JSON.stringify(eventData),
+      keepalive: true,
+    });
+  });
+
+  analytics.subscribe("input_changed", async (event) => {
+    const raw_octy_customer_id = await browser.localStorage.getItem(
+      "octy_customer_id"
+    );
+
+    let octy_customer_id = null;
+    if (raw_octy_customer_id != null) {
+      octy_customer_id = raw_octy_customer_id.replace(/^"(.*)"$/, "$1");
+    }
+
+    const fingerprint_id = await browser.cookie.get("fingerprint_id");
+
+    const eventData = {
+      id: event.id,
+      name: event.name,
+      fingerprint_id: fingerprint_id,
+      timestamp: event.timestamp,
+      clientId: event.clientId,
+      data: event.data,
+      context: event.context,
+      octy_customer_id: octy_customer_id,
+      shopify_customer_info: customer,
+      client_data,
+      cart: cart,
+    };
+
+    console.log(eventData);
+
+    fetch(`${endpoints.pixelURI}?shop=${settings.accountID}`, {
+      method: "POST",
+      body: JSON.stringify(eventData),
+      keepalive: true,
+    });
+  });
+
+  analytics.subscribe("input_focused", async (event) => {
+    const raw_octy_customer_id = await browser.localStorage.getItem(
+      "octy_customer_id"
+    );
+
+    let octy_customer_id = null;
+    if (raw_octy_customer_id != null) {
+      octy_customer_id = raw_octy_customer_id.replace(/^"(.*)"$/, "$1");
+    }
+
+    const fingerprint_id = await browser.cookie.get("fingerprint_id");
+
+    const eventData = {
+      id: event.id,
+      name: event.name,
+      fingerprint_id: fingerprint_id,
+      timestamp: event.timestamp,
+      clientId: event.clientId,
+      data: event.data,
+      context: event.context,
+      octy_customer_id: octy_customer_id,
+      shopify_customer_info: customer,
+      client_data,
+      cart: cart,
+    };
+
+    console.log(eventData);
+
+    fetch(`${endpoints.pixelURI}?shop=${settings.accountID}`, {
+      method: "POST",
       body: JSON.stringify(eventData),
       keepalive: true,
     });

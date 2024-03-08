@@ -95,7 +95,6 @@ async function establishWebSocketConnection(browser) {
       if (message.type === 'coupon') {
         console.log('Received coupon code:', message.couponCode);
 
-        // todo (morning of 16 December 2023): trigger custom event by updating a value in localStorage so octy-polling.js can pick up the change instead of making use of the window.dispatchEvent(event); as we don't have access to the window object in shopify web pixels strict sandbox
         const event = new CustomEvent('octy:gift_coupon', { detail: { octy_coupon_code: message.couponCode } });
         window.dispatchEvent(event);
 
