@@ -1,6 +1,7 @@
 FROM node:18-alpine
 
 ENV SHOPIFY_API_KEY=99855a0593168b7a8e5b31bba6b9574d
+ENV SHOPIFY_API_SECRET=e1e6c834e3bc4c1cbc8dcd2f83a833b5
 ENV SCOPES=read_customer_events,write_pixels,write_products,read_products,write_checkouts,write_orders,write_metaobjects,read_metaobjects
 ENV OCTY_APP_HOST=https://pod1.sonity.net/octy-shopify
 ENV SHOPIFY_APP_URL=https://pod1.sonity.net
